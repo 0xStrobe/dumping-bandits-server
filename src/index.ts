@@ -1,12 +1,19 @@
-import fs from "fs";
-import { addTextToImage, parseTokenInfo } from "./utils";
+import express from "express";
+import { magic } from "./utils";
 
-const main = async () => {
-  // const inputBuffer = fs.readFileSync("./images/uponly.png");
+const app = express();
 
-  // const outputBuffer = await addTextToImage("1", "1", inputBuffer);
-  // fs.writeFileSync("output.png", outputBuffer);
-  parseTokenInfo("5");
-};
+app.get("/nft/:id", (req, res) => {
+  const id = req.params.id;
+  magic(id).then((buffer) => {
+    res.writeHead(200, {
+      "Content-Type": "image/png",
+      "Content-Length": buffer.length,
+    });
+    res.end(buffer);
+  });
+});
 
-main();
+app.listen(3456, () => {
+  console.log("Server started on port 3456");
+});
