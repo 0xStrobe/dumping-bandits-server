@@ -17,6 +17,6 @@
   },
   "dependencies": {
     "canvas": "^2.11.0",
-    "ethers": "^6.0.4"
+    "ethers": "^5.4.6"
   }
 }
